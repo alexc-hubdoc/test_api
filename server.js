@@ -21,6 +21,7 @@ app.get('/greeting', (req, res) => {
   res.json({ greeting: 'Why hello there!' }).status(200);
 })
 
+// localhost:5000/greeting/alex
 app.get('/greeting/:name', (req, res) => {
   if (req.params) {
     console.log('PARAM: ', req.params);
