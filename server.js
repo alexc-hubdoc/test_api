@@ -21,6 +21,13 @@ app.get('/greeting', (req, res) => {
   res.json({ greeting: 'Why hello there!' }).status(200);
 })
 
+app.get('/greeting/:name', (req, res) => {
+  if (req.params) {
+    console.log('PARAM: ', req.params);
+  }
+  res.send(`This is your param: ${req.params.name}`).status(200);
+})
+
 app.post('/test', (req, res) => {
   console.log('Request Body: ', req.body);
   res.json({ test_response: 'Hello from test post route' }).status(200);
