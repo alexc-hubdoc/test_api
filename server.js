@@ -70,4 +70,4 @@ app.post('/test', (req, res) => {
   return res.json({ test_response: 'Hello from test post route' }).status(200);
 })
 
-app.listen(port, () => console.log(`Example API listening on port ${port}!`))
+app.listen(port, () => console.log(`Example API listening on port ${port}!`));
