@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <script type="text/javascript">
+      window.onload=function(){
+        const submitExcuse = (event) => {
+          event.preventDefault();
+          const data = { caption: event.target.elements.caption.value, category: event.target.elements.category.value };
+          fetch(event.target.action, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data),
+          })
+          .then((response) => response.json())
+          .then((data) => {
+            console.log('Status:', data.status);
+            if (data.status === 'success') {
+              document.getElementById("status").style.color = "green";
+              document.getElementById("status").innerHTML = "Excuse added to database";
+            } else {
+              document.getElementById("status").style.color = "red";
+              document.getElementById("status").innerHTML = "Failed to add excuse to database";
+            }
+          })
+        };
+        const excuseForm = document.getElementById('excuse-form');
+        excuseForm.addEventListener('submit', submitExcuse);
+
+        const fetchExcuse = () => {
+          fetch('http://localhost:5000/excuse')
+            .then((response) => {
+              return response.json();
+            })
+            .then((data) => {
+              console.log(data.excuse);
+              document.getElementById("fetched-excuse").innerHTML = data.excuse;
+            });
+        };
+        const fetchButton = document.getElementById('fetch-excuse');
+        fetchButton.addEventListener('click', fetchExcuse);
+      };
+    </script>
+  </head>
+<body>
+  <main id="main">
+    <form id="excuse-form" action="/excuse" method="post">
+      <h3>Submit an Excuse!</h3>
+      <label for="caption">Caption:</label>
+      <textarea rows="4" cols="50" type="text" id="caption" name="caption" required></textarea>
+      <div id="status"></div>
+      <br><br>
+      <select id="category" name="category" required>
+        <option value="">--Category--</option>
+        <option value="medical">Medical</option>
+        <option value="family">Family</option>
+        <option value="social">Social</option>
+      </select><br><br>
+      <input type="submit">
+    </form>
+    <br>
+    <br>
+    <div id="get-excuse"> 
+      <h3>Fetch an Excuse!</h3>
+      <textarea id="fetched-excuse" rows="4" cols="50" disabled></textarea>
+      <br>
+      <button id="fetch-excuse">Fetch</button> 
+    </div>
+  </main>
+</body>
+</html>
+
+
+

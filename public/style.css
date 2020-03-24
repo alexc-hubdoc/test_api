@@ -1,0 +1,43 @@
+#excuse-form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-style: solid;
+  display: inline-block;
+  padding: 2em;
+  max-width: 300px;
+}
+
+main {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+input[type=text] {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  box-sizing: border-box;
+}
+
+#get-excuse {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-style: solid;
+  display: inline-block;
+  padding: 2em;
+}
+
+textarea {
+  max-width: 300px;
+  min-width: 300px;;
+  max-height: 150px;
+  min-height: 100px;
+  font: arial;
+  font-size: 1em;
+}
