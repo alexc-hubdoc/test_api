@@ -5,8 +5,6 @@ const bodyParser = require('body-parser');
 const db = require('./db');
 const uuid = require('uuid');
 
-const activeCategories = ['medical', 'social', 'family'];
-
 const generateRandomId = () => uuid.v4();
 
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -48,26 +46,5 @@ app.get('/excuse', async (req, res) => {
   const excuse = results.rows[Math.floor(Math.random() * (results.rows.length))].caption;
   return res.json({ excuse }).status(200);
 });
-
-// localhost:5000/greeting?name=alex
-app.get('/greeting', (req, res) => {
-  if (req.query.name) {
-    return res.send(`Hello ${req.query.name}`).status(200);
-  } 
-  return res.json({ greeting: 'Why hello there!' }).status(200);
-})
-
-// localhost:5000/greeting/alex
-app.get('/greeting/:name', (req, res) => {
-  if (req.params) {
-    console.log('PARAM: ', req.params);
-  }
-  return res.send(`This is your param: ${req.params.name}`).status(200);
-})
-
-app.post('/test', (req, res) => {
-  console.log('Request Body: ', JSON.stringify(req.body));
-  return res.json({ test_response: 'Hello from test post route' }).status(200);
-})
 
 app.listen(port, () => console.log(`Example API listening on port ${port}!`));
