@@ -17,6 +17,14 @@ app.get('/status', (req, res) => {
   return res.send(`Test API is running on port ${port}`).status(200);
 });
 
+// localhost:5000/greeting?name=alex
+app.get('/greeting', (req, res) => {
+  if (req.query.name) {
+    return res.send(`Hello ${req.query.name}`).status(200);
+  } 
+  return res.send('Why hello there').status(200);
+})
+
 app.post('/excuse', async (req, res) => {
   const {caption, category} = req.body;
   
@@ -42,7 +50,6 @@ app.get('/excuse', async (req, res) => {
   const results = await db.query({
     text: 'SELECT * FROM excuses',
   });
-  console.log(results.rows);
   const excuse = results.rows[Math.floor(Math.random() * (results.rows.length))].caption;
   return res.json({ excuse }).status(200);
 });
